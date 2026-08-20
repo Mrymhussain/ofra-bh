@@ -24,7 +24,7 @@ The app uses authentication, full CRUD functionality, RESTful routes, and a rela
 
 ## Wireframes
 
-The wireframes include:
+The wireframes show the planned layout for:
 
 * Home page
 * Products page
@@ -34,28 +34,31 @@ The wireframes include:
 * Sign-up page
 * Sign-in page
 
-**Wireframe Link:**
-will be added here 
+![OFRA BH Wireframes](./public/images/wireframes.png)
 
 ## ERD
 
-The app has two models: will be added soon 
+The app has two models: User and Product.
+
+![OFRA BH ERD](./public/images/erd.png)
 
 ### User
 
-* username
-* password
+* `_id`
+* `username`
+* `password`
 
 ### Product
 
-* name
-* category
-* shade
-* price
-* description
-* image
-* stock
-* owner
+* `_id`
+* `name`
+* `category`
+* `shade`
+* `price`
+* `description`
+* `image`
+* `stock`
+* `owner`
 
 ### Relationship
 
@@ -63,24 +66,19 @@ The app has two models: will be added soon
 * Each Product belongs to one User.
 * The `owner` field in Product references the User who created it.
 
-```text
-User
- |
- | creates
- |
- ↓
-Product
-```
-
 ## RESTful Routes
 
-* `GET /products` - shows all products
-* `GET /products/new` - shows the form to add a product
-* `POST /products` - creates a new product
-* `GET /products/:productId` - shows one product
-* `GET /products/:productId/edit` - shows the edit form
-* `PUT /products/:productId` - updates a product
-* `DELETE /products/:productId` - deletes a product
+### Product Routes
+
+| Action | Route                       | HTTP Verb |
+| ------ | --------------------------- | --------- |
+| Index  | `/products`                 | GET       |
+| New    | `/products/new`             | GET       |
+| Create | `/products`                 | POST      |
+| Show   | `/products/:productId`      | GET       |
+| Edit   | `/products/:productId/edit` | GET       |
+| Update | `/products/:productId`      | PUT       |
+| Delete | `/products/:productId`      | DELETE    |
 
 ## Screenshots
 
@@ -89,8 +87,7 @@ Screenshots will be added when the app is finished.
 ## Getting Started
 
 **Deployed App:**
-will be added as soon as its done
-
+Will be added when the app is deployed.
 
 To use the app:
 
@@ -104,10 +101,30 @@ To use the app:
 
 ## Technologies Used
 
-
+* HTML
+* CSS
+* JavaScript
+* Node.js
+* Express
+* EJS
+* MongoDB
+* Mongoose
+* Express Session
+* Bcrypt
+* Method Override
+* Git
+* GitHub
 
 ## Attributions
 
-
+* General Assembly Session Authentication Template
+* OFRA BH product images
 
 ## Next Steps
+
+* Add product search.
+* Add product filtering by category.
+* Add available and sold-out status.
+* Add a shopping cart.
+* Add customer orders.
+* Add direct image uploads.
