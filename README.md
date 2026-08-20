@@ -1,89 +1,113 @@
-<h1>
-  <span class="headline">New Project</span>
-  <span class="subhead">Setup</span>
-</h1>
+# OFRA BH
 
-## Setup
+![OFRA BH Logo](./public/images/ofra-logo.png)
 
-Open your Terminal application and navigate to your projects directory:
+## Description
 
-## Cloning the Auth boilerplate
+OFRA BH is a MEN Stack web application for displaying and managing beauty products.
 
-This template uses the [`MEN Stack Auth Template`](https://github.com/Bahrain-SEB-15/SOLUTION-SESSION-AUTH-TEMPLATE) as starter code. Doing so allows us to have a connection established to our MongoDB Atlas, add functioning auth for our user model, and install some of the packages we will need for our app build.
+Users can browse products and view their details. Signed-in users can add products, and only the user who created a product can edit or delete it.
 
-Navigate to the [SOLUTION Session Auth Template](https://github.com/Bahrain-SEB-15/SOLUTION-SESSION-AUTH-TEMPLATE) and clone the repository to your machine and rename the folder to your desired project name by running the following command in your terminal.
+The app uses authentication, full CRUD functionality, RESTful routes, and a relationship between the User and Product models.
 
-**Be sure to replace `<YOUR-PROJECT-NAME>` with your desired project name!**:
+## User Stories
 
-```bash
-git clone https://github.com/Bahrain-SEB-15/SOLUTION-SESSION-AUTH-TEMPLATE.git <YOUR-PROJECT-NAME>
-```
+* As a user, I want to visit the homepage so I can understand what the app is about.
+* As a user, I want to sign up so I can create an account.
+* As a user, I want to sign in so I can access more features.
+* As a user, I want to view all products.
+* As a user, I want to view one product and its details.
+* As a signed-in user, I want to add a new product.
+* As a user, I want to edit products that I created.
+* As a user, I want to delete products that I created.
+* As a user, I want to sign out when I am finished.
 
-Note by adding the `<YOUR-PROJECT-NAME>` argument we're cloning the specified repo into a directory called `<YOUR-PROJECT-NAME>` on our machines.
+## Wireframes
 
-Next, `cd` into your renamed directory:
+The wireframes include:
 
-**Be sure to replace `<YOUR-PROJECT-NAME>` with your desired project name!**:
+* Home page
+* Products page
+* Product details page
+* Add product page
+* Edit product page
+* Sign-up page
+* Sign-in page
 
-```bash
-cd <YOUR-PROJECT-NAME>
-```
+**Wireframe Link:**
+will be added here 
 
-Finally, remove the existing `.git` information from this template:
+## ERD
 
-```bash
-rm -rf .git
-```
+The app has two models: will be added soon 
 
-> Removing the `.git` info is important as this is just a starter template provided by GA. You do not need the existing git history for this project.
+### User
 
-## GitHub setup
+* username
+* password
 
-To add this project to GitHub, initialize a new Git repository:
+### Product
 
-```bash
-git init
-git add .
-git commit -m "init commit"
-```
+* name
+* category
+* shade
+* price
+* description
+* image
+* stock
+* owner
 
-Make a new repository on [GitHub](https://github.com/) for your project.
+### Relationship
 
-Link your local project to your remote GitHub repo:
-
-- use the second set of commands that appear on the empty repo to connect your local project to GitHub.
-
-> 🚨 Do not copy the above command. It will not work. Your GitHub username will replace `<github-username>` (including the `<` and `>`) in the URL above.
-
-Open the project's folder in your code editor:
-
-```bash
-code .
-```
-
-## Install dependencies
-
-Next, you will want to install all of the packages listed in `package.json`
-
-```bash
-npm i
-```
-
-## Create your .env
-
-Lastly, we want to create `MONGODB_URI` and `SESSION_SECRET` to hold values used in our auth logic.  `MONGODB_URI` will connect to your MongoDB Atlas connection string so you will need to establish one for this application.  `SESSION_SECRET` will aid in your auth session logic.
-
-Add a `.env` file to your application and add the following secret keys to your application:
+* One User can create many Products.
+* Each Product belongs to one User.
+* The `owner` field in Product references the User who created it.
 
 ```text
-MONGODB_URI=
-SESSION_SECRET=
+User
+ |
+ | creates
+ |
+ ↓
+Product
 ```
 
-Start the server and you are ready for launch.
+## RESTful Routes
 
-```bash
-npm run dev
-```
+* `GET /products` - shows all products
+* `GET /products/new` - shows the form to add a product
+* `POST /products` - creates a new product
+* `GET /products/:productId` - shows one product
+* `GET /products/:productId/edit` - shows the edit form
+* `PUT /products/:productId` - updates a product
+* `DELETE /products/:productId` - deletes a product
 
-Happy Coding!
+## Screenshots
+
+Screenshots will be added when the app is finished.
+
+## Getting Started
+
+**Deployed App:**
+will be added as soon as its done
+
+
+To use the app:
+
+* Open the homepage.
+* Browse the products.
+* Click a product to view its details.
+* Sign up or sign in.
+* Add a new product.
+* Edit or delete products that you created.
+* Sign out when finished.
+
+## Technologies Used
+
+
+
+## Attributions
+
+
+
+## Next Steps
