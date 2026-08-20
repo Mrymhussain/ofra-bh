@@ -101,24 +101,8 @@ To use the app:
 
 ## Technologies Used
 
-* HTML
-* CSS
-* JavaScript
-* Node.js
-* Express
-* EJS
-* MongoDB
-* Mongoose
-* Express Session
-* Bcrypt
-* Method Override
-* Git
-* GitHub
+Will be added when it's done 
 
-## Attributions
-
-* General Assembly Session Authentication Template
-* OFRA BH product images
 
 ## Next Steps
 
@@ -127,4 +111,3 @@ To use the app:
 * Add available and sold-out status.
 * Add a shopping cart.
 * Add customer orders.
-* Add direct image uploads.
