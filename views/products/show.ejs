@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= product.name %></title>
+  </head>
+
+  <body>
+    <h1><%= product.name %></h1>
+
+    <img
+      src="/images/rodeo-drive.png"
+      alt="Rodeo Drive Highlighter"
+      width="300"
+    />
+
+    <p>Category: <%= product.category %></p>
+    <p>Shade: <%= product.shade %></p>
+    <p>Price: <%= product.price %> BHD</p>
+    <p>Stock: <%= product.stock %></p>
+    <p>Description: <%= product.description %></p>
+
+    <% if (isOwner) { %>
+      <a href="/products/<%= product._id %>/edit">Edit</a>
+    <% } %>
+
+    <a href="/products">Back to Products</a>
+  </body>
+</html>

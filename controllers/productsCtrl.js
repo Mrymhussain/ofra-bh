@@ -30,8 +30,29 @@ const create = async (req, res) => {
   }
 };
 
+const show = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.productId);
+
+    let isOwner = false;
+
+    if (req.session.user) {
+      isOwner = product.owner.toString() === req.session.user._id.toString();
+    }
+
+    res.render('products/show.ejs', {
+      product,
+      isOwner,
+    });
+  } catch (error) {
+    console.log(error);
+    res.send('Unable to display product.');
+  }
+};
+
 module.exports = {
   index,
   new: newProduct,
   create,
+  show,
 };
