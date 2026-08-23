@@ -5,39 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/partials.css" />
 
-    <title><%= product.name %></title>
+    <title><%= product.name %> | OFRA BH</title>
   </head>
 
   <body>
+    <%- include('../partials/_navbar.ejs') %>
 
     <% const imageName = product.name
       .trim()
       .toLowerCase()
       .replaceAll(' ', '-'); %>
 
-    <h1><%= product.name %></h1>
+    <main class="product-details-page">
+      <section class="product-show-image">
+        <img
+          src="/images/<%= imageName %>.png"
+          alt="<%= product.name %>"
+        />
+      </section>
 
-    <img
-      src="/images/<%= imageName %>.png"
-      alt="<%= product.name %>"
-      width="300"
-    />
+      <section class="product-info">
+        <p class="product-small-title">OFRA BH</p>
 
-    <p>Category: <%= product.category %></p>
-    <p>Shade: <%= product.shade %></p>
-    <p>Price: <%= product.price %> BHD</p>
-    <p>Stock: <%= product.stock %></p>
-    <p>Description: <%= product.description %></p>
+        <h1><%= product.name %></h1>
 
-    <% if (isOwner) { %>
-      <a href="/products/<%= product._id %>/edit">Edit</a>
+        <div class="product-divider">
+          <span></span>
+          <span class="heart">♥</span>
+          <span></span>
+        </div>
 
-      <form action="/products/<%= product._id %>?_method=DELETE" method="POST">
-        <button type="submit">Delete</button>
-      </form>
-    <% } %>
+        <p>
+          <strong>Category:</strong>
+          <%= product.category %>
+        </p>
 
-    <a href="/products">Back to Products</a>
+        <p>
+          <strong>Shade:</strong>
+          <%= product.shade %>
+        </p>
+
+        <p class="show-price">
+          <strong>Price:</strong>
+          <%= product.price %> BD
+        </p>
+
+        <p>
+          <strong>Stock:</strong>
+          <%= product.stock %> left
+        </p>
+
+        <p class="product-description">
+          <strong>Description:</strong><br />
+          <%= product.description %>
+        </p>
+
+        <% if (isOwner) { %>
+          <div class="product-actions">
+            <a
+              href="/products/<%= product._id %>/edit"
+              class="edit-button"
+            >
+              Edit
+            </a>
+
+            <form
+              action="/products/<%= product._id %>?_method=DELETE"
+              method="POST"
+            >
+              <button type="submit" class="delete-button">
+                Delete
+              </button>
+            </form>
+          </div>
+        <% } %>
+
+        <a href="/products" class="back-link">
+          ← Back to Products
+        </a>
+      </section>
+    </main>
+
+    <%- include('../partials/_footer.ejs') %>
   </body>
 </html>

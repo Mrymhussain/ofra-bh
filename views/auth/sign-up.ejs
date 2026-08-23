@@ -3,21 +3,73 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign Up</title>
+
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/partials.css" />
+
+    <title>Sign Up | OFRA BH</title>
   </head>
+
   <body>
-    <h1>Create a new account!</h1>
-    <form action="/auth/sign-up" method="POST">
-      <label for="username">Username:</label>
-      <input type="text" name="username" id="username" required />
+    <%- include('../partials/_navbar.ejs') %>
 
-      <label for="password">Password:</label>
-      <input type="password" name="password" id="password" required />
+    <main class="auth-page">
+      <section class="auth-card">
+        <h1>Create an Account</h1>
 
-      <label for="confirmPassword">Confirm Password:</label>
-      <input type="password" name="confirmPassword" id="confirmPassword" required />
+        <p class="auth-subtitle">
+          Join OFRA BH and find your glow.
+        </p>
 
-      <button type="submit">Sign up</button>
-    </form>
+        <form action="/auth/sign-up" method="POST" class="auth-form">
+          <div class="form-group">
+            <label for="username">Username</label>
+
+            <input
+              type="text"
+              name="username"
+              id="username"
+              placeholder="Enter your username"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+
+            <input
+              type="password"
+              name="confirmPassword"
+              id="confirmPassword"
+              placeholder="Confirm your password"
+              required
+            />
+          </div>
+
+          <button type="submit" class="auth-button">
+            Sign Up
+          </button>
+        </form>
+
+        <p class="auth-switch">
+          Already have an account?
+          <a href="/auth/sign-in">Sign In</a>
+        </p>
+      </section>
+    </main>
+
+    <%- include('../partials/_footer.ejs') %>
   </body>
 </html>
