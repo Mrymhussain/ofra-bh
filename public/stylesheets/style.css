@@ -210,6 +210,111 @@ body {
   color: white;
 }
 
+/* Auth Pages */
+
+.auth-page {
+  width: 90%;
+  min-height: 600px;
+  margin: 40px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 430px;
+  padding: 45px;
+  text-align: center;
+  background-color: rgba(255, 250, 249, 0.72);
+  border-radius: 16px;
+}
+
+.auth-logo {
+  width: 110px;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+.auth-card h1 {
+  margin: 5px 0;
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 500;
+}
+
+.auth-subtitle {
+  margin: 8px 0 30px;
+  color: #c94e70;
+  font-size: 14px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  width: 100%;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 14px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d9a5b2;
+  border-radius: 7px;
+  background-color: rgba(255, 255, 255, 0.75);
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  outline: none;
+}
+
+.form-group input:focus {
+  border-color: #c94e70;
+}
+
+.auth-button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  border: 1.5px solid #c94e70;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.4);
+  color: #c94e70;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.auth-button:hover {
+  background-color: #c94e70;
+  color: white;
+}
+
+.auth-switch {
+  margin-top: 25px;
+  font-size: 13px;
+}
+
+.auth-switch a {
+  color: #c94e70;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-switch a:hover {
+  text-decoration: underline;
+}
+
 /* Responsive */
 
 @media (max-width: 800px) {
@@ -244,5 +349,19 @@ body {
   .heading-decoration span:first-child,
   .heading-decoration span:last-child {
     width: 80px;
+  }
+
+  .auth-page {
+    min-height: 500px;
+    margin: 30px auto;
+  }
+
+  .auth-card {
+    max-width: 380px;
+    padding: 35px 25px;
+  }
+
+  .auth-card h1 {
+    font-size: 30px;
   }
 }
