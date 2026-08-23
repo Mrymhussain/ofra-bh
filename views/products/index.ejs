@@ -3,6 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+
     <title>Products</title>
   </head>
 
@@ -10,12 +13,26 @@
     <h1>Our Products</h1>
 
     <% products.forEach((product) => { %>
+
+      <% const imageName = product.name
+        .trim()
+        .toLowerCase()
+        .replaceAll(' ', '-'); %>
+
       <div>
+        <img
+          src="/images/<%= imageName %>.png"
+          alt="<%= product.name %>"
+          width="250"
+        />
+
         <h2><%= product.name %></h2>
+
         <p><%= product.price %> BHD</p>
 
         <a href="/products/<%= product._id %>">Details</a>
       </div>
+
     <% }) %>
   </body>
 </html>

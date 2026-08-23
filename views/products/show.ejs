@@ -3,17 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= product.name %></title>
 
     <link rel="stylesheet" href="/stylesheets/style.css" />
+
+    <title><%= product.name %></title>
   </head>
 
   <body>
+
+    <% const imageName = product.name
+      .trim()
+      .toLowerCase()
+      .replaceAll(' ', '-'); %>
+
     <h1><%= product.name %></h1>
 
     <img
-      src="/images/rodeo-drive.png"
-      alt="Rodeo Drive Highlighter"
+      src="/images/<%= imageName %>.png"
+      alt="<%= product.name %>"
       width="300"
     />
 
@@ -26,10 +33,7 @@
     <% if (isOwner) { %>
       <a href="/products/<%= product._id %>/edit">Edit</a>
 
-      <form
-        action="/products/<%= product._id %>?_method=DELETE"
-        method="POST"
-      >
+      <form action="/products/<%= product._id %>?_method=DELETE" method="POST">
         <button type="submit">Delete</button>
       </form>
     <% } %>
