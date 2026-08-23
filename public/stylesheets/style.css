@@ -433,7 +433,6 @@ body {
   text-decoration: underline;
 }
 
-/* Responsive */
 
 @media (max-width: 800px) {
   .landing-page {
