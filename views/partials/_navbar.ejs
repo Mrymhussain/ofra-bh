@@ -1,8 +1,12 @@
-<nav id="navbar">
+<nav class="navbar">
+  <a href="/">Home</a>
+
+  <a href="/products">Products</a>
+
   <% if (user) { %>
-  <a class="nav-link" href="/auth/sign-out">Sign Out</a>
+    <a href="/products/new">Add</a>
+    <a href="/auth/sign-out">Sign Out</a>
   <% } else { %>
-  <a class="nav-link" href="/auth/sign-up">Sign Up</a>
-  <a class="nav-link" href="/auth/sign-in">Sign In</a>
+    <a href="/auth/sign-in">Sign</a>
   <% } %>
 </nav>

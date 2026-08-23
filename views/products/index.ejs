@@ -5,34 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/partials.css" />
 
     <title>Products</title>
   </head>
 
   <body>
-    <h1>Our Products</h1>
+    <%- include('../partials/_navbar.ejs') %>
 
-    <% products.forEach((product) => { %>
+    <main class="products-page">
+      <h1>Our Products</h1>
 
-      <% const imageName = product.name
-        .trim()
-        .toLowerCase()
-        .replaceAll(' ', '-'); %>
+      <div class="products-container">
+        <% products.forEach((product) => { %>
 
-      <div>
-        <img
-          src="/images/<%= imageName %>.png"
-          alt="<%= product.name %>"
-          width="250"
-        />
+          <% const imageName = product.name
+            .trim()
+            .toLowerCase()
+            .replaceAll(' ', '-'); %>
 
-        <h2><%= product.name %></h2>
+          <div class="product-card">
+            <img
+              src="/images/<%= imageName %>.png"
+              alt="<%= product.name %>"
+            />
 
-        <p><%= product.price %> BHD</p>
+            <h2><%= product.name %></h2>
 
-        <a href="/products/<%= product._id %>">Details</a>
+            <p><%= product.price %> BD</p>
+
+            <a href="/products/<%= product._id %>">
+              Details
+            </a>
+          </div>
+
+        <% }) %>
       </div>
+    </main>
 
-    <% }) %>
+    <%- include('../partials/_footer.ejs') %>
   </body>
 </html>
