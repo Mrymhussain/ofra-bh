@@ -50,9 +50,63 @@ const show = async (req, res) => {
   }
 };
 
+const edit = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.productId);
+
+    if (product.owner.toString() !== req.session.user._id.toString()) {
+      return res.send('You cannot edit this product.');
+    }
+
+    res.render('products/edit.ejs', {
+      product,
+    });
+  } catch (error) {
+    console.log(error);
+    res.send('Unable to edit product.');
+  }
+};
+
+const update = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.productId);
+
+    if (product.owner.toString() !== req.session.user._id.toString()) {
+      return res.send('You cannot update this product.');
+    }
+
+    await Product.findByIdAndUpdate(req.params.productId, req.body);
+
+    res.redirect(`/products/${req.params.productId}`);
+  } catch (error) {
+    console.log(error);
+    res.send('Unable to update product.');
+  }
+};
+
+const deleteProduct = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.productId);
+
+    if (product.owner.toString() !== req.session.user._id.toString()) {
+      return res.send('You cannot delete this product.');
+    }
+
+    await Product.findByIdAndDelete(req.params.productId);
+
+    res.redirect('/products');
+  } catch (error) {
+    console.log(error);
+    res.send('Unable to delete product.');
+  }
+};
+
 module.exports = {
   index,
   new: newProduct,
   create,
   show,
+  edit,
+  update,
+  deleteProduct,
 };
