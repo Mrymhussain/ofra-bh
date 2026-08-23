@@ -7,16 +7,26 @@
     <link rel="stylesheet" href="/stylesheets/style.css" />
     <link rel="stylesheet" href="/stylesheets/partials.css" />
 
-    <title>Products</title>
+    <title>OFRA BH | Products</title>
   </head>
 
   <body>
     <%- include('../partials/_navbar.ejs') %>
 
     <main class="products-page">
-      <h1>Our Products</h1>
+      <section class="collection-heading">
+        <h1>OUR COLLECTION</h1>
 
-      <div class="products-container">
+        <div class="heading-decoration">
+          <span></span>
+          <span class="heart">♥</span>
+          <span></span>
+        </div>
+
+        <p>Find your perfect glow.</p>
+      </section>
+
+      <section class="products-container">
         <% products.forEach((product) => { %>
 
           <% const imageName = product.name
@@ -24,23 +34,30 @@
             .toLowerCase()
             .replaceAll(' ', '-'); %>
 
-          <div class="product-card">
-            <img
-              src="/images/<%= imageName %>.png"
-              alt="<%= product.name %>"
-            />
+          <article class="product-card">
+            <div class="product-image">
+              <img
+                src="/images/<%= imageName %>.png"
+                alt="<%= product.name %>"
+              />
+            </div>
 
             <h2><%= product.name %></h2>
 
-            <p><%= product.price %> BD</p>
+            <p class="product-price">
+              <%= product.price %> BD
+            </p>
 
-            <a href="/products/<%= product._id %>">
+            <a
+              href="/products/<%= product._id %>"
+              class="details-button"
+            >
               Details
             </a>
-          </div>
+          </article>
 
         <% }) %>
-      </div>
+      </section>
     </main>
 
     <%- include('../partials/_footer.ejs') %>

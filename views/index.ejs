@@ -7,29 +7,59 @@
     <link rel="stylesheet" href="/stylesheets/style.css" />
     <link rel="stylesheet" href="/stylesheets/partials.css" />
 
-    <title>Home Page</title>
+    <title>OFRA BH</title>
   </head>
 
   <body>
     <%- include('./partials/_navbar.ejs') %>
 
-    <% if (user) { %>
-      <h1>Welcome to the app, <%= user.username %>!</h1>
+    <main class="landing-page">
+      <section class="landing-image">
+        <img
+          src="/images/ofra-home.png"
+          alt="OFRA beauty collection"
+        />
+      </section>
 
-      <a href="/products">
-        <button type="button">View Products</button>
-      </a>
+      <section class="landing-content">
+        <h1>
+          YOUR GLOW,<br />
+          YOUR WAY
+        </h1>
 
-      <a href="/products/new">
-        <button type="button">Add Product</button>
-      </a>
-    <% } else { %>
-      <h1>Welcome to the app!</h1>
+        <img
+          class="landing-logo"
+          src="/images/ofra-logo.png"
+          alt="OFRA BH Logo"
+        />
 
-      <a href="/products">
-        <button type="button">View Products</button>
-      </a>
-    <% } %>
+        <% if (user) { %>
+          <p class="landing-welcome">
+            Welcome, <%= user.username %>
+          </p>
+
+          <a href="/products" class="main-button">
+            View Products
+          </a>
+
+          <a href="/products/new" class="main-button">
+            Add Product
+          </a>
+        <% } else { %>
+          <a href="/auth/sign-up" class="main-button">
+            Sign Up
+          </a>
+
+          <a href="/auth/sign-in" class="main-button">
+            Sign In
+          </a>
+        <% } %>
+
+        <p class="landing-tagline">
+          Highlight • Define • Glow
+        </p>
+      </section>
+    </main>
 
     <%- include('./partials/_footer.ejs') %>
   </body>

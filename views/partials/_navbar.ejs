@@ -1,12 +1,17 @@
 <nav class="navbar">
-  <a href="/">Home</a>
+  <a href="/" class="nav-logo">
+    <img src="/images/ofra-logo.png" alt="OFRA BH Logo" />
+  </a>
 
-  <a href="/products">Products</a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/products" class="active-link">Products</a>
 
-  <% if (user) { %>
-    <a href="/products/new">Add</a>
-    <a href="/auth/sign-out">Sign Out</a>
-  <% } else { %>
-    <a href="/auth/sign-in">Sign</a>
-  <% } %>
+    <% if (user) { %>
+      <a href="/products/new">Add Product</a>
+      <a href="/auth/sign-out">Sign Out</a>
+    <% } else { %>
+      <a href="/auth/sign-in">Sign In</a>
+    <% } %>
+  </div>
 </nav>
