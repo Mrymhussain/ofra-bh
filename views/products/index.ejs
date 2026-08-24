@@ -29,31 +29,30 @@
       <section class="products-container">
         <% products.forEach((product) => { %>
 
-          <% const imageName = product.name
-            .trim()
-            .toLowerCase()
-            .replaceAll(' ', '-'); %>
+          <% const productName = product.name.trim().toLowerCase(); %>
+          <% let imagePath = ''; %>
+
+          <% if (productName.includes('rodeo')) { %>
+            <% imagePath = '/images/rodeo-drive.png'; %>
+          <% } else if (productName.includes('pink')) { %>
+            <% imagePath = '/images/pink-bliss.png'; %>
+          <% } else if (productName.includes('beverly')) { %>
+            <% imagePath = '/images/beverly-hills.png'; %>
+          <% } %>
 
           <article class="product-card">
+
             <div class="product-image">
-              <img
-                src="/images/<%= imageName %>.png"
-                alt="<%= product.name %>"
-              />
+              <a href="/products/<%= product._id %>">
+                <img
+                  src="<%= imagePath %>"
+                  alt="<%= product.name %>"
+                />
+              </a>
             </div>
 
             <h2><%= product.name %></h2>
 
-            <p class="product-price">
-              <%= product.price %> BD
-            </p>
-
-            <a
-              href="/products/<%= product._id %>"
-              class="details-button"
-            >
-              Details
-            </a>
           </article>
 
         <% }) %>

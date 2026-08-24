@@ -13,15 +13,22 @@
   <body>
     <%- include('../partials/_navbar.ejs') %>
 
-    <% const imageName = product.name
-      .trim()
-      .toLowerCase()
-      .replaceAll(' ', '-'); %>
+    <% const productName = product.name.trim().toLowerCase(); %>
+    <% let imagePath = ''; %>
+
+    <% if (productName.includes('rodeo')) { %>
+      <% imagePath = '/images/rodeo-drive.png'; %>
+    <% } else if (productName.includes('pink')) { %>
+      <% imagePath = '/images/pink-bliss.png'; %>
+    <% } else if (productName.includes('beverly')) { %>
+      <% imagePath = '/images/beverly-hills.png'; %>
+    <% } %>
 
     <main class="product-details-page">
+
       <section class="product-show-image">
         <img
-          src="/images/<%= imageName %>.png"
+          src="<%= imagePath %>"
           alt="<%= product.name %>"
         />
       </section>
@@ -64,6 +71,7 @@
 
         <% if (isOwner) { %>
           <div class="product-actions">
+
             <a
               href="/products/<%= product._id %>/edit"
               class="edit-button"
@@ -79,13 +87,15 @@
                 Delete
               </button>
             </form>
+
           </div>
         <% } %>
 
         <a href="/products" class="back-link">
-          ← Back to Products
+          Back to Products
         </a>
       </section>
+
     </main>
 
     <%- include('../partials/_footer.ejs') %>
