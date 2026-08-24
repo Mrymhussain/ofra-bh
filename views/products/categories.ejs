@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/partials.css" />
+
+    <title>Shop by Category | OFRA BH</title>
+  </head>
+
+  <body>
+    <%- include('../partials/_navbar.ejs') %>
+
+    <main class="categories-page">
+
+      <section class="category-heading">
+        <h1>SHOP BY CATEGORY</h1>
+
+        <div class="heading-decoration">
+          <span></span>
+          <span class="heart">♥</span>
+          <span></span>
+        </div>
+
+        <p>Discover your perfect glow.</p>
+      </section>
+
+      <section class="category-container">
+
+        <a href="/products/category/highlighter" class="category-card">
+          <img
+            src="/images/highlighter-category.png"
+            alt="Highlighter products"
+          />
+
+          <h2>Highlighters</h2>
+
+          <p>Glow brighter than ever.</p>
+
+          <span>Explore Highlighters →</span>
+        </a>
+
+
+        <a href="/products/category/lipstick" class="category-card">
+          <img
+            src="/images/lipstick-category.png"
+            alt="Lipstick products"
+          />
+
+          <h2>Lipsticks</h2>
+
+          <p>Beautiful shades. Bold you.</p>
+
+          <span>Explore Lipsticks →</span>
+        </a>
+
+
+        <a href="/products/category/skincare" class="category-card">
+          <img
+            src="/images/skincare-category.png"
+            alt="Skin care products"
+          />
+
+          <h2>Skin Care</h2>
+
+          <p>Good skin. Good mood. Always.</p>
+
+          <span>Explore Skin Care →</span>
+        </a>
+
+      </section>
+
+    </main>
+
+    <%- include('../partials/_footer.ejs') %>
+  </body>
+</html>
