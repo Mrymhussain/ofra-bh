@@ -1,10 +1,15 @@
 <nav class="navbar">
 
-  <a href="/" class="nav-logo">
+  <a
+    href="/"
+    class="nav-logo"
+  >
+
     <img
       src="/images/ofra-logo.png"
       alt="OFRA BH Logo"
     />
+
   </a>
 
 
@@ -18,16 +23,28 @@
       Products
     </a>
 
+
     <% if (user) { %>
 
+      <% if (user.isAdmin) { %>
 
-      <a href="/products/new">
-        Add Product
-      </a>
+        <a href="/products/new">
+          Add Product
+        </a>
+
+      <% } else { %>
+
+        <a href="/cart">
+          Cart
+        </a>
+
+      <% } %>
+
 
       <a href="/auth/sign-out">
         Sign Out
       </a>
+
 
     <% } else { %>
 

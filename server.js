@@ -19,7 +19,7 @@ const addUserToViews = require('./middleware/addUserToViews');
 const authRouter = require('./routes/authRouter');
 const pagesRouter = require('./routes/pagesRouter');
 const productRouter = require ('./routes/products.js');
-
+const cartRouter = require('./routes/cart.js');
 // Set the port from environment variable or default to 3000
 const port = process.env.PORT ? process.env.PORT : '3000';
 
@@ -45,6 +45,8 @@ app.use(addUserToViews);
 app.use('', pagesRouter);
 app.use('/auth', authRouter);
 app.use('/products', productRouter);
+app.use('/cart',cartRouter);
+
 // Customer middleware
 app.use(isSignedIn);
 
@@ -54,4 +56,12 @@ app.get('/protected', async (req, res) => {
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);
+});
+
+app.use(isSignedIn);
+
+app.get('/protected' , async(req, res)=> {
+  res.send (
+    'You are logged in as ${req.session.user.username}'
+  );
 });

@@ -9,8 +9,14 @@ const isSignedIn = require(
   '../middleware/isSignedIn.js'
 );
 
-router.get('/', productsCtrl.index);
+const isAdmin = require(
+  '../middleware/isAdmin.js'
+);
 
+router.get(
+  '/',
+  productsCtrl.index
+);
 
 router.get(
   '/categories',
@@ -25,30 +31,35 @@ router.get(
 router.get(
   '/new',
   isSignedIn,
+  isAdmin,
   productsCtrl.new
 );
 
 router.post(
   '/',
   isSignedIn,
+  isAdmin,
   productsCtrl.create
 );
 
 router.get(
   '/:productId/edit',
   isSignedIn,
+  isAdmin,
   productsCtrl.edit
 );
 
 router.put(
   '/:productId',
   isSignedIn,
+  isAdmin,
   productsCtrl.update
 );
 
 router.delete(
   '/:productId',
   isSignedIn,
+  isAdmin,
   productsCtrl.deleteProduct
 );
 

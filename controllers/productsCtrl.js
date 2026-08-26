@@ -4,9 +4,10 @@ const index = async (req, res) => {
   try {
     const products = await Product.find({});
 
-    res.render('products/index.ejs', {
-      products,
-    });
+    res.render(
+      'products/index.ejs',
+      { products }
+    );
   } catch (error) {
     console.log(error);
     res.send('Unable to display products.');
@@ -21,27 +22,43 @@ const category = async (req, res) => {
   try {
     let categoryName;
 
-    if (req.params.categoryName === 'highlighter') {
+    if (
+      req.params.categoryName ===
+      'highlighter'
+    ) {
       categoryName = 'Highlighter';
-    } else if (req.params.categoryName === 'lipstick') {
+    } else if (
+      req.params.categoryName ===
+      'lipstick'
+    ) {
       categoryName = 'Lipstick';
-    } else if (req.params.categoryName === 'skincare') {
+    } else if (
+      req.params.categoryName ===
+      'skincare'
+    ) {
       categoryName = 'Skin Care';
     } else {
-      return res.send('Category not found.');
+      return res.send(
+        'Category not found.'
+      );
     }
 
     const products = await Product.find({
       category: categoryName,
     });
 
-    res.render('products/category.ejs', {
-      products,
-      categoryName,
-    });
+    res.render(
+      'products/category.ejs',
+      {
+        products,
+        categoryName,
+      }
+    );
   } catch (error) {
     console.log(error);
-    res.send('Unable to display category.');
+    res.send(
+      'Unable to display category.'
+    );
   }
 };
 
@@ -51,120 +68,142 @@ const newProduct = (req, res) => {
 
 const create = async (req, res) => {
   try {
-    req.body.owner = req.session.user._id;
+    req.body.owner =
+      req.session.user._id;
 
-    const product = await Product.create(req.body);
+    const product =
+      await Product.create(req.body);
 
-    if (product.category === 'Highlighter') {
-      return res.redirect('/products/category/highlighter');
-    } else if (product.category === 'Lipstick') {
-      return res.redirect('/products/category/lipstick');
-    } else if (product.category === 'Skin Care') {
-      return res.redirect('/products/category/skincare');
+    if (
+      product.category ===
+      'Highlighter'
+    ) {
+      return res.redirect(
+        '/products/category/highlighter'
+      );
     }
 
-    res.redirect('/products/categories');
+    if (
+      product.category ===
+      'Lipstick'
+    ) {
+      return res.redirect(
+        '/products/category/lipstick'
+      );
+    }
+
+    if (
+      product.category ===
+      'Skin Care'
+    ) {
+      return res.redirect(
+        '/products/category/skincare'
+      );
+    }
+
+    res.redirect(
+      '/products/categories'
+    );
   } catch (error) {
     console.log(error);
-    res.send('Unable to create product.');
+    res.send(
+      'Unable to create product.'
+    );
   }
 };
 
 const show = async (req, res) => {
   try {
-    const product = await Product.findById(
-      req.params.productId
-    );
+    const product =
+      await Product.findById(
+        req.params.productId
+      );
 
-    let isOwner = false;
+    let categoryPath;
 
-    if (req.session.user) {
-      if (
-        product.owner.toString() ===
-        req.session.user._id.toString()
-      ) {
-        isOwner = true;
-      }
+    if (
+      product.category ===
+      'Highlighter'
+    ) {
+      categoryPath = 'highlighter';
+    } else if (
+      product.category ===
+      'Lipstick'
+    ) {
+      categoryPath = 'lipstick';
+    } else {
+      categoryPath = 'skincare';
     }
 
-    res.render('products/show.ejs', {
-      product,
-      isOwner,
-    });
+    res.render(
+      'products/show.ejs',
+      {
+        product,
+        categoryPath,
+      }
+    );
   } catch (error) {
     console.log(error);
-    res.send('Unable to display product.');
+    res.send(
+      'Unable to display product.'
+    );
   }
 };
 
 const edit = async (req, res) => {
   try {
-    const product = await Product.findById(
-      req.params.productId
+    const product =
+      await Product.findById(
+        req.params.productId
+      );
+
+    res.render(
+      'products/edit.ejs',
+      { product }
     );
-
-    if (
-      product.owner.toString() !==
-      req.session.user._id.toString()
-    ) {
-      return res.send('You cannot edit this product.');
-    }
-
-    res.render('products/edit.ejs', {
-      product,
-    });
   } catch (error) {
     console.log(error);
-    res.send('Unable to edit product.');
+    res.send(
+      'Unable to edit product.'
+    );
   }
 };
 
 const update = async (req, res) => {
   try {
-    const product = await Product.findById(
-      req.params.productId
-    );
-
-    if (
-      product.owner.toString() !==
-      req.session.user._id.toString()
-    ) {
-      return res.send('You cannot update this product.');
-    }
-
     await Product.findByIdAndUpdate(
       req.params.productId,
       req.body
     );
 
-    res.redirect(`/products/${req.params.productId}`);
+    res.redirect(
+      `/products/${req.params.productId}`
+    );
   } catch (error) {
     console.log(error);
-    res.send('Unable to update product.');
+    res.send(
+      'Unable to update product.'
+    );
   }
 };
 
-const deleteProduct = async (req, res) => {
+const deleteProduct = async (
+  req,
+  res
+) => {
   try {
-    const product = await Product.findById(
-      req.params.productId
-    );
-
-    if (
-      product.owner.toString() !==
-      req.session.user._id.toString()
-    ) {
-      return res.send('You cannot delete this product.');
-    }
-
     await Product.findByIdAndDelete(
       req.params.productId
     );
 
-    res.redirect('/products/categories');
+    res.redirect(
+      '/products/categories'
+    );
   } catch (error) {
     console.log(error);
-    res.send('Unable to delete product.');
+    res.send(
+      'Unable to delete product.'
+    );
   }
 };
 

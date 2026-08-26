@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+
+    <link
+      rel="stylesheet"
+      href="/stylesheets/style.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="/stylesheets/partials.css"
+    />
+
+    <title>Order Complete | OFRA BH</title>
+  </head>
+
+  <body>
+
+    <%- include('../partials/_navbar.ejs') %>
+
+    <main class="success-page">
+
+      <div class="success-overlay">
+
+        <section
+          class="success-popup"
+          role="dialog"
+        >
+
+          <div class="success-icon">
+            ✓
+          </div>
+
+          <p class="product-small-title">
+            OFRA BH
+          </p>
+
+          <h1>
+            Order Complete
+          </h1>
+
+          <div class="product-divider">
+            <span></span>
+            <span class="heart">♥</span>
+            <span></span>
+          </div>
+
+          <p class="success-message">
+            Thank you for shopping with OFRA BH.
+            Your order has been placed successfully.
+          </p>
+
+          <a
+            href="/products/categories"
+            class="success-button"
+          >
+            Continue Shopping
+          </a>
+
+        </section>
+
+      </div>
+
+    </main>
+
+    <%- include('../partials/_footer.ejs') %>
+
+  </body>
+</html>

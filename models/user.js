@@ -11,10 +11,21 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+
+  isAdmin: {
+    type: Boolean,
+    default: false,
+  },
+
+  cart: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Product',
+    },
+  ],
 });
-// initial the model
+
 
 const User = mongoose.model('User', userSchema);
 
-// export it
 module.exports = User;

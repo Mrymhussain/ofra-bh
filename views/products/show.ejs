@@ -1,41 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-    <link rel="stylesheet" href="/stylesheets/partials.css" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
 
-    <title><%= product.name %> | OFRA BH</title>
+    <link
+      rel="stylesheet"
+      href="/stylesheets/style.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="/stylesheets/partials.css"
+    />
+
+    <title>
+      <%= product.name %> | OFRA BH
+    </title>
   </head>
 
   <body>
+
     <%- include('../partials/_navbar.ejs') %>
 
     <% let imagePath = product.image; %>
 
     <% if (product.name.trim() === 'Rodeo Drive') { %>
+
       <% imagePath = '/images/rodeo-drive.png'; %>
 
     <% } else if (product.name.trim() === 'Pink Bliss') { %>
+
       <% imagePath = '/images/pink-bliss.png'; %>
 
     <% } else if (product.name.trim() === 'Beverly Hills') { %>
+
       <% imagePath = '/images/beverly-hills.png'; %>
 
     <% } else if (product.name.trim() === 'Dubai') { %>
+
       <% imagePath = '/images/dubai-lipstick.png'; %>
+
     <% } %>
+
 
     <main class="product-details-page">
 
       <section class="product-show-image">
+
         <img
           src="<%= imagePath %>"
           alt="<%= product.name %>"
         />
+
       </section>
+
 
       <section class="product-info">
 
@@ -49,36 +73,65 @@
 
         <div class="product-divider">
           <span></span>
-          <span class="heart">♥</span>
+
+          <span class="heart">
+            ♥
+          </span>
+
           <span></span>
         </div>
 
+
         <p>
-          <strong>Category:</strong>
+          <strong>
+            Category:
+          </strong>
+
           <%= product.category %>
         </p>
 
+
         <p>
-          <strong>Shade:</strong>
+          <strong>
+            Shade:
+          </strong>
+
           <%= product.shade %>
         </p>
 
+
         <p class="show-price">
-          <strong>Price:</strong>
+          <strong>
+            Price:
+          </strong>
+
           <%= product.price %> BD
         </p>
 
+
         <p>
-          <strong>Stock:</strong>
+          <strong>
+            Stock:
+          </strong>
+
           <%= product.stock %> left
         </p>
 
+
         <p class="product-description">
-          <strong>Description:</strong><br />
+
+          <strong>
+            Description:
+          </strong>
+
+          <br />
+
           <%= product.description %>
+
         </p>
 
-        <% if (isOwner) { %>
+
+        <% if (user && user.isAdmin) { %>
 
           <div class="product-actions">
 
@@ -93,20 +146,44 @@
               action="/products/<%= product._id %>?_method=DELETE"
               method="POST"
             >
+
               <button
                 type="submit"
                 class="delete-button"
               >
                 Delete
               </button>
+
+            </form>
+
+          </div>
+
+
+        <% } else if (user) { %>
+
+          <div class="product-actions">
+
+            <form
+              action="/cart/<%= product._id %>"
+              method="POST"
+            >
+
+              <button
+                type="submit"
+                class="edit-button"
+              >
+                Add to Cart
+              </button>
+
             </form>
 
           </div>
 
         <% } %>
 
+
         <a
-          href="/products/category/<%= product.category === 'Highlighter' ? 'highlighter' : product.category === 'Lipstick' ? 'lipstick' : 'skincare' %>"
+          href="/products/category/<%= categoryPath %>"
           class="back-link"
         >
           Back to Products
@@ -116,6 +193,9 @@
 
     </main>
 
+
     <%- include('../partials/_footer.ejs') %>
+
   </body>
+
 </html>
