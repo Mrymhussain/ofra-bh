@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const cartCtrl = require(
-  '../controllers/cartCtrl.js'
-);
+const cartCtrl = require('../controllers/cartCtrl.js');
 
 const isSignedIn = require(
   '../middleware/isSignedIn.js'
@@ -18,6 +16,13 @@ router.get(
   isSignedIn,
   isCustomer,
   cartCtrl.index
+);
+
+router.get(
+  '/confirm',
+  isSignedIn,
+  isCustomer,
+  cartCtrl.confirm
 );
 
 router.post(

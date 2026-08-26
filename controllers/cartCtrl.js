@@ -1,5 +1,4 @@
 const User = require('../models/user.js');
-const Product = require('../models/product.js');
 
 const index = async (req, res) => {
   try {
@@ -19,10 +18,7 @@ const index = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-
-    res.send(
-      'Unable to display cart.'
-    );
+    res.send('Unable to display cart.');
   }
 };
 
@@ -32,18 +28,15 @@ const add = async (req, res) => {
       req.session.user._id
     );
 
-    const product = await Product.findById(
+    user.cart.push(
       req.params.productId
     );
-
-    user.cart.push(product._id);
 
     await user.save();
 
     res.redirect('/cart');
   } catch (error) {
     console.log(error);
-
     res.send(
       'Unable to add product to cart.'
     );
@@ -65,9 +58,32 @@ const remove = async (req, res) => {
     res.redirect('/cart');
   } catch (error) {
     console.log(error);
-
     res.send(
       'Unable to remove product.'
+    );
+  }
+};
+
+const confirm = async (req, res) => {
+  try {
+    const user = await User.findById(
+      req.session.user._id
+    ).populate('cart');
+
+    let total = 0;
+
+    user.cart.forEach((product) => {
+      total += product.price;
+    });
+
+    res.render('cart/confirm.ejs', {
+      cart: user.cart,
+      total,
+    });
+  } catch (error) {
+    console.log(error);
+    res.send(
+      'Unable to confirm order.'
     );
   }
 };
@@ -82,14 +98,11 @@ const checkout = async (req, res) => {
 
     await user.save();
 
-    res.render(
-      'cart/success.ejs'
-    );
+    res.render('cart/success.ejs');
   } catch (error) {
     console.log(error);
-
     res.send(
-      'Unable to checkout.'
+      'Unable to complete order.'
     );
   }
 };
@@ -98,5 +111,6 @@ module.exports = {
   index,
   add,
   remove,
+  confirm,
   checkout,
 };

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
 
@@ -22,6 +23,7 @@
   </head>
 
   <body>
+
     <%- include('../partials/_navbar.ejs') %>
 
     <main class="products-page">
@@ -41,131 +43,159 @@
       </section>
 
 
-      <section class="products-container">
+      <% if (cart.length === 0) { %>
 
-        <% if (cart.length === 0) { %>
+        <section class="empty-cart">
 
           <p>Your cart is empty.</p>
 
-        <% } %>
-
-
-        <% cart.forEach((product) => { %>
-
-          <% let imagePath = product.image; %>
-
-          <% if (product.name.trim() === 'Rodeo Drive') { %>
-
-            <% imagePath = '/images/rodeo-drive.png'; %>
-
-          <% } else if (product.name.trim() === 'Pink Bliss') { %>
-
-            <% imagePath = '/images/pink-bliss.png'; %>
-
-          <% } else if (product.name.trim() === 'Beverly Hills') { %>
-
-            <% imagePath = '/images/beverly-hills.png'; %>
-
-          <% } else if (product.name.trim() === 'Dubai') { %>
-
-            <% imagePath = '/images/dubai-lipstick.png'; %>
-
-          <% } else if (product.name.trim() === 'Manila') { %>
-
-            <% imagePath = '/images/manila-lipstick.png'; %>
-
-          <% } else if (product.name.trim() === 'Kelly') { %>
-
-            <% imagePath = '/images/kelly-lipstick.png'; %>
-
-          <% } %>
-
-
-          <article class="product-card">
-
-            <div class="product-image">
-
-              <a href="/products/<%= product._id %>">
-
-                <img
-                  src="<%= imagePath %>"
-                  alt="<%= product.name %>"
-                />
-
-              </a>
-
-            </div>
-
-
-            <h2>
-              <%= product.name %>
-            </h2>
-
-
-            <p>
-              <%= product.price %> BD
-            </p>
-
-
-            <form
-              action="/cart/<%= product._id %>?_method=DELETE"
-              method="POST"
-            >
-
-              <button
-                type="submit"
-                class="delete-button"
-              >
-                Remove
-              </button>
-
-            </form>
-
-          </article>
-
-        <% }) %>
-
-      </section>
-
-
-      <% if (cart.length > 0) { %>
-
-        <section class="collection-heading">
-
-          <h2>
-            Total: <%= total %> BD
-          </h2>
-
-
-          <form
-            action="/cart/checkout"
-            method="POST"
+          <a
+            href="/products/categories"
+            class="main-button"
           >
-
-            <button
-              type="submit"
-              class="edit-button"
-            >
-              Checkout
-            </button>
-
-          </form>
+            Start Shopping
+          </a>
 
         </section>
 
+      <% } else { %>
+
+
+        <section class="products-container">
+
+          <% cart.forEach((product) => { %>
+
+            <% let imagePath = product.image; %>
+
+
+            <% if (product.name.trim() === 'Rodeo Drive') { %>
+
+              <% imagePath = '/images/rodeo-drive.png'; %>
+
+            <% } else if (product.name.trim() === 'Pink Bliss') { %>
+
+              <% imagePath = '/images/pink-bliss.png'; %>
+
+            <% } else if (product.name.trim() === 'Beverly Hills') { %>
+
+              <% imagePath = '/images/beverly-hills.png'; %>
+
+            <% } else if (product.name.trim() === 'Dubai') { %>
+
+              <% imagePath = '/images/dubai-lipstick.png'; %>
+
+            <% } else if (product.name.trim() === 'Manila') { %>
+
+              <% imagePath = '/images/manila-lipstick.png'; %>
+
+            <% } else if (product.name.trim() === 'Kelly') { %>
+
+              <% imagePath = '/images/kelly-lipstick.png'; %>
+
+            <% } %>
+
+
+            <article class="product-card">
+
+              <div class="product-image">
+
+                <a
+                  href="/products/<%= product._id %>"
+                >
+
+                  <img
+                    src="<%= imagePath %>"
+                    alt="<%= product.name %>"
+                  />
+
+                </a>
+
+              </div>
+
+
+              <h2>
+                <%= product.name %>
+              </h2>
+
+              <p>
+                <%= product.price %> BD
+              </p>
+
+
+              <form
+                action="/cart/<%= product._id %>?_method=DELETE"
+                method="POST"
+              >
+
+                <button
+                  type="submit"
+                  class="delete-button"
+                >
+                  Remove
+                </button>
+
+              </form>
+
+            </article>
+
+          <% }) %>
+
+        </section>
+
+
+        <section class="cart-summary">
+
+          <h2>Order Summary</h2>
+
+          <div class="cart-summary-row">
+
+            <span>
+              Products
+            </span>
+
+            <span>
+              <%= cart.length %>
+            </span>
+
+          </div>
+
+
+          <div class="cart-summary-row cart-total">
+
+            <span>
+              Total
+            </span>
+
+            <strong>
+              <%= total %> BD
+            </strong>
+
+          </div>
+
+
+          <a
+            href="/cart/confirm"
+            class="cart-confirm-button"
+          >
+            Confirm Order
+          </a>
+
+        </section>
+
+
+        <a
+          href="/products/categories"
+          class="back-link"
+        >
+          Continue Shopping
+        </a>
+
       <% } %>
-
-
-      <a
-        href="/products/categories"
-        class="back-link"
-      >
-        Continue Shopping
-      </a>
 
     </main>
 
     <%- include('../partials/_footer.ejs') %>
 
   </body>
+
 </html>
