@@ -1,4 +1,5 @@
 const User = require('../models/user.js');
+const Product = require('../models/product.js');
 
 const index = async (req, res) => {
   try {
@@ -28,9 +29,15 @@ const add = async (req, res) => {
       req.session.user._id
     );
 
-    user.cart.push(
+    const product = await Product.findById(
       req.params.productId
     );
+
+    if (product.stock <= 0) {
+      return res.send('Product is out of stock.');
+    }
+
+    user.cart.push(product._id);
 
     await user.save();
 
@@ -64,12 +71,25 @@ const remove = async (req, res) => {
   }
 };
 
-
 const checkout = async (req, res) => {
   try {
     const user = await User.findById(
       req.session.user._id
-    );
+    ).populate('cart');
+
+    for (const product of user.cart) {
+      if (product.stock <= 0) {
+        return res.send(
+          `${product.name} is out of stock.`
+        );
+      }
+    }
+
+    for (const product of user.cart) {
+      product.stock = product.stock - 1;
+
+      await product.save();
+    }
 
     user.cart = [];
 
