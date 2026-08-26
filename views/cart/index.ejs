@@ -173,12 +173,17 @@
           </div>
 
 
-          <a
-            href="/cart/confirm"
+          <form
+          action="/cart/checkout"
+          method="POST"
+        >
+          <button
+            type="submit"
             class="cart-confirm-button"
           >
             Confirm Order
-          </a>
+          </button>
+        </form>
 
         </section>
 

@@ -1,128 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
     <meta charset="UTF-8" />
-
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-
-    <link
-      rel="stylesheet"
-      href="/stylesheets/style.css"
-    />
-
-    <link
-      rel="stylesheet"
-      href="/stylesheets/partials.css"
-    />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/partials.css" />
     <title>Thank You | OFRA BH</title>
   </head>
 
-  <body>
-
+  <body class="success-background">
     <%- include('../partials/_navbar.ejs') %>
-
-    <main class="success-background">
-
-      <div class="success-overlay">
-
-        <section class="success-popup">
-
-          <div class="success-circle">
-            ✓
-          </div>
-
-          <p class="product-small-title">
-            OFRA BH
-          </p>
-
-          <h1>
-            Thank You!
-          </h1>
-
-
-          <div class="heading-decoration">
-            <span></span>
-            <span class="heart">♥</span>
-            <span></span>
-          </div>
-
-
-          <p class="success-title">
-            Your order is confirmed.
-          </p>
-
-
-          <p class="success-text">
-            Thank you for shopping with OFRA BH.
-            We hope you enjoy your new glow.
-          </p>
-
-
-          <a
-            href="/products/categories"
-            class="success-button"
-          >
-            Continue Shopping
-          </a>
-
-        </section>
-
-      </div>
-
-    </main>
-
 
     <div id="celebration"></div>
 
+    <div class="success-overlay">
+      <section class="success-popup">
+        <div class="success-circle">✓</div>
+
+        <p class="product-small-title">OFRA BH</p>
+
+        <h1>Thank You</h1>
+
+        <div class="heading-decoration">
+          <span></span>
+          <span class="heart">♥</span>
+          <span></span>
+        </div>
+
+        <p class="success-title">Your order has been confirmed.</p>
+
+        <p class="success-text">
+          Thank you for shopping with OFRA BH. We hope you enjoy your new glow.
+        </p>
+
+        <a href="/products/categories" class="success-button">
+          Continue Shopping
+        </a>
+      </section>
+    </div>
 
     <script>
-      const celebration =
-        document.getElementById(
-          'celebration'
-        );
+      const celebration = document.getElementById('celebration');
 
-      for (let i = 0; i < 55; i++) {
-        const piece =
-          document.createElement(
-            'span'
-          );
-
-        piece.classList.add(
-          'celebration-piece'
-        );
+      for (let i = 0; i < 28; i++) {
+        const piece = document.createElement('div');
+        piece.classList.add('celebration-piece');
 
         if (i % 3 === 0) {
-          piece.classList.add(
-            'celebration-light'
-          );
+          piece.classList.add('celebration-circle');
         }
 
-        if (i % 4 === 0) {
-          piece.classList.add(
-            'celebration-circle'
-          );
+        if (i % 2 === 0) {
+          piece.classList.add('celebration-light');
         }
 
-        piece.style.left =
-          Math.random() * 100 + '%';
+        piece.style.left = Math.random() * 100 + 'vw';
+        piece.style.animationDuration = 2 + Math.random() * 2 + 's';
+        piece.style.animationDelay = Math.random() * 0.8 + 's';
 
-        piece.style.animationDelay =
-          Math.random() * 1.2 + 's';
-
-        piece.style.animationDuration =
-          2.5 + Math.random() * 2 + 's';
-
-        celebration.appendChild(
-          piece
-        );
+        celebration.appendChild(piece);
       }
+
+      setTimeout(() => {
+        celebration.innerHTML = '';
+      }, 3500);
     </script>
-
   </body>
-
 </html>

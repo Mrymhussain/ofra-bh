@@ -64,29 +64,6 @@ const remove = async (req, res) => {
   }
 };
 
-const confirm = async (req, res) => {
-  try {
-    const user = await User.findById(
-      req.session.user._id
-    ).populate('cart');
-
-    let total = 0;
-
-    user.cart.forEach((product) => {
-      total += product.price;
-    });
-
-    res.render('cart/confirm.ejs', {
-      cart: user.cart,
-      total,
-    });
-  } catch (error) {
-    console.log(error);
-    res.send(
-      'Unable to confirm order.'
-    );
-  }
-};
 
 const checkout = async (req, res) => {
   try {
@@ -111,6 +88,5 @@ module.exports = {
   index,
   add,
   remove,
-  confirm,
   checkout,
 };

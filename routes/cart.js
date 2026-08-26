@@ -18,12 +18,7 @@ router.get(
   cartCtrl.index
 );
 
-router.get(
-  '/confirm',
-  isSignedIn,
-  isCustomer,
-  cartCtrl.confirm
-);
+
 
 router.post(
   '/checkout',
