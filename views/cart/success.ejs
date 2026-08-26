@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0"
@@ -12,7 +11,6 @@
       rel="stylesheet"
       href="/stylesheets/style.css"
     />
-
     <link
       rel="stylesheet"
       href="/stylesheets/partials.css"
@@ -22,55 +20,96 @@
   </head>
 
   <body>
-
     <%- include('../partials/_navbar.ejs') %>
 
-    <main class="success-page">
+    <main class="checkout-success-page">
+      <section class="checkout-popup">
+        <div class="success-checkmark">✓</div>
 
-      <div class="success-overlay">
+        <p class="checkout-brand">
+          OFRA BH
+        </p>
 
-        <section
-          class="success-popup"
-          role="dialog"
+        <h1>Order Complete</h1>
+
+        <div class="checkout-divider">
+          <span></span>
+          <span class="heart">♥</span>
+          <span></span>
+        </div>
+
+        <p class="checkout-message">
+          Your glow is on the way.
+        </p>
+
+        <p class="checkout-text">
+          Thank you for shopping with OFRA BH.
+          Your order has been placed successfully.
+        </p>
+
+        <a
+          href="/products/categories"
+          class="checkout-button"
         >
-
-          <div class="success-icon">
-            ✓
-          </div>
-
-          <p class="product-small-title">
-            OFRA BH
-          </p>
-
-          <h1>
-            Order Complete
-          </h1>
-
-          <div class="product-divider">
-            <span></span>
-            <span class="heart">♥</span>
-            <span></span>
-          </div>
-
-          <p class="success-message">
-            Thank you for shopping with OFRA BH.
-            Your order has been placed successfully.
-          </p>
-
-          <a
-            href="/products/categories"
-            class="success-button"
-          >
-            Continue Shopping
-          </a>
-
-        </section>
-
-      </div>
-
+          Continue Shopping
+        </a>
+      </section>
     </main>
 
     <%- include('../partials/_footer.ejs') %>
 
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+    <script>
+      const duration = 3500;
+      const animationEnd = Date.now() + duration;
+
+      const defaults = {
+        startVelocity: 30,
+        spread: 360,
+        ticks: 70,
+        zIndex: 9999
+      };
+
+      function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      const interval = setInterval(function () {
+        const timeLeft = animationEnd - Date.now();
+
+        if (timeLeft <= 0) {
+          return clearInterval(interval);
+        }
+
+        const particleCount = 50 * (timeLeft / duration);
+
+        confetti(
+          Object.assign({}, defaults, {
+            particleCount,
+            origin: {
+              x: randomInRange(0.1, 0.3),
+              y: Math.random() - 0.2
+            }
+          })
+        );
+
+        confetti(
+          Object.assign({}, defaults, {
+            particleCount,
+            origin: {
+              x: randomInRange(0.7, 0.9),
+              y: Math.random() - 0.2
+            }
+          })
+        );
+      }, 250);
+
+      confetti({
+        particleCount: 180,
+        spread: 120,
+        origin: { y: 0.6 }
+      });
+    </script>
   </body>
 </html>
