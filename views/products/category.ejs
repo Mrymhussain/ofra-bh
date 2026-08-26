@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/partials.css" />
+
+    <title><%= categoryName %> | OFRA BH</title>
+  </head>
+
+  <body>
+    <%- include('../partials/_navbar.ejs') %>
+
+    <main class="products-page">
+
+      <section class="collection-heading">
+
+        <% if (categoryName === 'Highlighter') { %>
+          <h1>HIGHLIGHTERS</h1>
+        <% } else if (categoryName === 'Lipstick') { %>
+          <h1>LIPSTICKS</h1>
+        <% } else if (categoryName === 'Skin Care') { %>
+          <h1>SKIN CARE</h1>
+        <% } %>
+
+        <div class="heading-decoration">
+          <span></span>
+          <span class="heart">♥</span>
+          <span></span>
+        </div>
+
+        <% if (categoryName === 'Highlighter') { %>
+          <p>Glow brighter than ever.</p>
+        <% } else if (categoryName === 'Lipstick') { %>
+          <p>Beautiful shades. Bold you.</p>
+        <% } else if (categoryName === 'Skin Care') { %>
+          <p>Good skin. Good mood. Always.</p>
+        <% } %>
+
+      </section>
+
+
+      <section class="products-container">
+
+        <% if (products.length === 0) { %>
+          <p>No products have been added to this category yet.</p>
+        <% } %>
+
+
+        <% products.forEach((product) => { %>
+
+          <% let imagePath = product.image; %>
+
+
+          <% if (product.name.trim() === 'Rodeo Drive') { %>
+
+            <% imagePath = '/images/rodeo-drive.png'; %>
+
+          <% } else if (product.name.trim() === 'Pink Bliss') { %>
+
+            <% imagePath = '/images/pink-bliss.png'; %>
+
+          <% } else if (product.name.trim() === 'Beverly Hills') { %>
+
+            <% imagePath = '/images/beverly-hills.png'; %>
+
+          <% } else if (product.name.trim() === 'Dubai') { %>
+
+            <% imagePath = '/images/dubai-lipstick.png'; %>
+
+          <% } %>
+
+
+          <article class="product-card">
+
+            <div class="product-image">
+
+              <a href="/products/<%= product._id %>">
+
+                <img
+                  src="<%= imagePath %>"
+                  alt="<%= product.name %>"
+                />
+
+              </a>
+
+            </div>
+
+            <h2><%= product.name %></h2>
+
+          </article>
+
+        <% }) %>
+
+      </section>
+
+
+      <a href="/products/categories" class="back-link">
+        Back to Categories
+      </a>
+
+    </main>
+
+    <%- include('../partials/_footer.ejs') %>
+  </body>
+</html>

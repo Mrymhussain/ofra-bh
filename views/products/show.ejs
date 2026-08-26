@@ -13,15 +13,19 @@
   <body>
     <%- include('../partials/_navbar.ejs') %>
 
-    <% const productName = product.name.trim().toLowerCase(); %>
-    <% let imagePath = ''; %>
+    <% let imagePath = product.image; %>
 
-    <% if (productName.includes('rodeo')) { %>
+    <% if (product.name.trim() === 'Rodeo Drive') { %>
       <% imagePath = '/images/rodeo-drive.png'; %>
-    <% } else if (productName.includes('pink')) { %>
+
+    <% } else if (product.name.trim() === 'Pink Bliss') { %>
       <% imagePath = '/images/pink-bliss.png'; %>
-    <% } else if (productName.includes('beverly')) { %>
+
+    <% } else if (product.name.trim() === 'Beverly Hills') { %>
       <% imagePath = '/images/beverly-hills.png'; %>
+
+    <% } else if (product.name.trim() === 'Dubai') { %>
+      <% imagePath = '/images/dubai-lipstick.png'; %>
     <% } %>
 
     <main class="product-details-page">
@@ -34,9 +38,14 @@
       </section>
 
       <section class="product-info">
-        <p class="product-small-title">OFRA BH</p>
 
-        <h1><%= product.name %></h1>
+        <p class="product-small-title">
+          OFRA BH
+        </p>
+
+        <h1>
+          <%= product.name %>
+        </h1>
 
         <div class="product-divider">
           <span></span>
@@ -70,6 +79,7 @@
         </p>
 
         <% if (isOwner) { %>
+
           <div class="product-actions">
 
             <a
@@ -83,17 +93,25 @@
               action="/products/<%= product._id %>?_method=DELETE"
               method="POST"
             >
-              <button type="submit" class="delete-button">
+              <button
+                type="submit"
+                class="delete-button"
+              >
                 Delete
               </button>
             </form>
 
           </div>
+
         <% } %>
 
-        <a href="/products" class="back-link">
+        <a
+          href="/products/category/<%= product.category === 'Highlighter' ? 'highlighter' : product.category === 'Lipstick' ? 'lipstick' : 'skincare' %>"
+          class="back-link"
+        >
           Back to Products
         </a>
+
       </section>
 
     </main>

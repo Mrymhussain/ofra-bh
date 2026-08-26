@@ -13,6 +13,38 @@ const index = async (req, res) => {
   }
 };
 
+const categories = (req, res) => {
+  res.render('products/categories.ejs');
+};
+
+const category = async (req, res) => {
+  try {
+    let categoryName;
+
+    if (req.params.categoryName === 'highlighter') {
+      categoryName = 'Highlighter';
+    } else if (req.params.categoryName === 'lipstick') {
+      categoryName = 'Lipstick';
+    } else if (req.params.categoryName === 'skincare') {
+      categoryName = 'Skin Care';
+    } else {
+      return res.send('Category not found.');
+    }
+
+    const products = await Product.find({
+      category: categoryName,
+    });
+
+    res.render('products/category.ejs', {
+      products,
+      categoryName,
+    });
+  } catch (error) {
+    console.log(error);
+    res.send('Unable to display category.');
+  }
+};
+
 const newProduct = (req, res) => {
   res.render('products/new.ejs');
 };
@@ -21,9 +53,17 @@ const create = async (req, res) => {
   try {
     req.body.owner = req.session.user._id;
 
-    await Product.create(req.body);
+    const product = await Product.create(req.body);
 
-    res.redirect('/products');
+    if (product.category === 'Highlighter') {
+      return res.redirect('/products/category/highlighter');
+    } else if (product.category === 'Lipstick') {
+      return res.redirect('/products/category/lipstick');
+    } else if (product.category === 'Skin Care') {
+      return res.redirect('/products/category/skincare');
+    }
+
+    res.redirect('/products/categories');
   } catch (error) {
     console.log(error);
     res.send('Unable to create product.');
@@ -32,12 +72,19 @@ const create = async (req, res) => {
 
 const show = async (req, res) => {
   try {
-    const product = await Product.findById(req.params.productId);
+    const product = await Product.findById(
+      req.params.productId
+    );
 
     let isOwner = false;
 
     if (req.session.user) {
-      isOwner = product.owner.toString() === req.session.user._id.toString();
+      if (
+        product.owner.toString() ===
+        req.session.user._id.toString()
+      ) {
+        isOwner = true;
+      }
     }
 
     res.render('products/show.ejs', {
@@ -52,9 +99,14 @@ const show = async (req, res) => {
 
 const edit = async (req, res) => {
   try {
-    const product = await Product.findById(req.params.productId);
+    const product = await Product.findById(
+      req.params.productId
+    );
 
-    if (product.owner.toString() !== req.session.user._id.toString()) {
+    if (
+      product.owner.toString() !==
+      req.session.user._id.toString()
+    ) {
       return res.send('You cannot edit this product.');
     }
 
@@ -69,13 +121,21 @@ const edit = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const product = await Product.findById(req.params.productId);
+    const product = await Product.findById(
+      req.params.productId
+    );
 
-    if (product.owner.toString() !== req.session.user._id.toString()) {
+    if (
+      product.owner.toString() !==
+      req.session.user._id.toString()
+    ) {
       return res.send('You cannot update this product.');
     }
 
-    await Product.findByIdAndUpdate(req.params.productId, req.body);
+    await Product.findByIdAndUpdate(
+      req.params.productId,
+      req.body
+    );
 
     res.redirect(`/products/${req.params.productId}`);
   } catch (error) {
@@ -86,15 +146,22 @@ const update = async (req, res) => {
 
 const deleteProduct = async (req, res) => {
   try {
-    const product = await Product.findById(req.params.productId);
+    const product = await Product.findById(
+      req.params.productId
+    );
 
-    if (product.owner.toString() !== req.session.user._id.toString()) {
+    if (
+      product.owner.toString() !==
+      req.session.user._id.toString()
+    ) {
       return res.send('You cannot delete this product.');
     }
 
-    await Product.findByIdAndDelete(req.params.productId);
+    await Product.findByIdAndDelete(
+      req.params.productId
+    );
 
-    res.redirect('/products');
+    res.redirect('/products/categories');
   } catch (error) {
     console.log(error);
     res.send('Unable to delete product.');
@@ -103,6 +170,8 @@ const deleteProduct = async (req, res) => {
 
 module.exports = {
   index,
+  categories,
+  category,
   new: newProduct,
   create,
   show,

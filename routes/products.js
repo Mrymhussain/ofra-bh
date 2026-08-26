@@ -1,22 +1,60 @@
 const express = require('express');
 const router = express.Router();
 
-const productsCtrl = require('../controllers/productsCtrl.js');
-const isSignedIn = require('../middleware/isSignedIn.js');
+const productsCtrl = require(
+  '../controllers/productsCtrl.js'
+);
+
+const isSignedIn = require(
+  '../middleware/isSignedIn.js'
+);
 
 router.get('/', productsCtrl.index);
 
-router.get('/categories', (req, res) => {
-  res.render('products/categories.ejs');
-});
 
-router.get('/new', isSignedIn, productsCtrl.new);
-router.post('/', isSignedIn, productsCtrl.create);
+router.get(
+  '/categories',
+  productsCtrl.categories
+);
 
-router.get('/:productId/edit', isSignedIn, productsCtrl.edit);
-router.put('/:productId', isSignedIn, productsCtrl.update);
-router.delete('/:productId', isSignedIn, productsCtrl.deleteProduct);
+router.get(
+  '/category/:categoryName',
+  productsCtrl.category
+);
 
-router.get('/:productId', productsCtrl.show);
+router.get(
+  '/new',
+  isSignedIn,
+  productsCtrl.new
+);
+
+router.post(
+  '/',
+  isSignedIn,
+  productsCtrl.create
+);
+
+router.get(
+  '/:productId/edit',
+  isSignedIn,
+  productsCtrl.edit
+);
+
+router.put(
+  '/:productId',
+  isSignedIn,
+  productsCtrl.update
+);
+
+router.delete(
+  '/:productId',
+  isSignedIn,
+  productsCtrl.deleteProduct
+);
+
+router.get(
+  '/:productId',
+  productsCtrl.show
+);
 
 module.exports = router;
