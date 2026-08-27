@@ -100,6 +100,25 @@ To use the app:
 * Edit or delete products that you created.
 * Sign out when finished.
 
+
+## Screenshots
+
+### Home Page
+
+![OFRA BH Home Page](./public/images/home-page.png)
+
+### Shop by Category
+
+![OFRA BH Product Categories](./public/images/categories-page.png)
+
+### Product Details
+
+![OFRA BH Product Details](./public/images/product-details.png)
+
+### Order Confirmation
+
+![OFRA BH Order Confirmation](./public/images/order-confirmation.png)
+
 ## Technologies Used
 
 - MEN Stack
