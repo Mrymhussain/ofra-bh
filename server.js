@@ -7,6 +7,7 @@ const express = require('express');
 
 const app = express();
 
+//This is for MangoDB status 
 const isProduction = process.env.NODE_ENV === 'production';
 
 if (isProduction) {

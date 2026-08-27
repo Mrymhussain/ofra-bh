@@ -12,15 +12,19 @@ The app uses authentication, full CRUD functionality, RESTful routes, and a rela
 
 ## User Stories
 
-* As a user, I want to visit the homepage so I can understand what the app is about.
-* As a user, I want to sign up so I can create an account.
-* As a user, I want to sign in so I can access more features.
-* As a user, I want to view all products.
-* As a user, I want to view one product and its details.
-* As a signed-in user, I want to add a new product.
-* As a user, I want to edit products that I created.
-* As a user, I want to delete products that I created.
+* As a user, I want to visit the homepage and understand the website.
+* As a user, I want to sign up and create an account.
+* As a user, I want to sign in to use the website.
+* As a user, I want to browse products by category.
+* As a user, I want to view the details of a product.
+* As a user, I want to add products to my cart.
+* As a user, I want to remove products from my cart.
+* As a user, I want to confirm my order.
 * As a user, I want to sign out when I am finished.
+* As an admin, I want to add new products.
+* As an admin, I want to edit products.
+* As an admin, I want to delete products.
+
 
 ## Wireframes
 
@@ -80,14 +84,11 @@ The app has two models: User and Product.
 | Update | `/products/:productId`      | PUT       |
 | Delete | `/products/:productId`      | DELETE    |
 
-## Screenshots
-
-Screenshots will be added when the app is finished.
 
 ## Getting Started
 
-**Deployed App:**
-Will be added when the app is deployed.
+## Deployed App
+[View OFRA BH ](https://ofra-bh.onrender.com/)
 
 To use the app:
 
@@ -101,13 +102,18 @@ To use the app:
 
 ## Technologies Used
 
-Will be added when it's done 
+- MEN Stack
+  - MongoDB
+  - Express.js
+  - Node.js
+- Mongoose
+- EJS
+- HTML
+- CSS
+- JavaScript
 
-
-## Next Steps
-
+## Future Work 
 * Add product search.
-* Add product filtering by category.
 * Add available and sold-out status.
-* Add a shopping cart.
-* Add customer orders.
+* Add an online payment option.
+* Add order history for customers.
