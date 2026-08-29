@@ -154,9 +154,7 @@ To use the app:
 
 ## Attributions
 
-- All product images and visual assets used in this project were sourced from the official [OFRA Cosmetics](https://www.ofracosmetics.com/) website and are used for educational purposes only.
-- Fonts were sourced from [Google Fonts](https://fonts.google.com/).
-- The project was built using the General Assembly MEN Stack Session Authentication starter template.
+- Product images were sourced from the official [OFRA Cosmetics](https://www.ofracosmetics.com/) website.
 
 ## Future Work
 
